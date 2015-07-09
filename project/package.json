@@ -1,0 +1,16 @@
+{
+  "name": "gulp-concat-bug",
+  "version": "1.0.0",
+  "description": "demo a problem with UTF encoding",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^0.24.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0"
+  }
+}
