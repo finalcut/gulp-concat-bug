@@ -1,0 +1,17 @@
+start test 1
+
+encoding: UTF16-LE
+
+end test 1;start test 2
+
+encoding: UTF16-BE
+
+end test 2;start test 3
+
+encoding: UTF16-LE
+
+end test 3;start test 4
+
+encoding: UTF16-BE
+
+end test 4

@@ -1,0 +1,5 @@
+start test 1
+
+encoding: UTF16-LE
+
+end test 1

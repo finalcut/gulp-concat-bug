@@ -73,6 +73,19 @@ var paths = {
     }
   },
 
+  test5: {
+    concat: {
+      sources: [ // order of these files is important as some functions depend on others.
+        './innerdata/test5/test1_UTF8.txt',
+        './innerdata/test5/test2_UTF8.txt',
+        './innerdata/test5/test3_UTF8.txt',
+        './innerdata/test5/test4_UTF8.txt',
+      ],
+      outfile: 'test5.txt',
+      outpath: './'
+    }
+  },
+
 };
 
 
@@ -133,5 +146,14 @@ gulp.task('test4', function(cb) {
     cb();
 });
 
+gulp.task('test5', function(cb) {
+  var test5 = gulp.src(paths.test5.concat.sources)
+    .pipe(concat(paths.test5.concat.outfile, {
+      newLine: ';'
+    }))
+    .pipe(gulp.dest(paths.test5.concat.outpath))
+    test5.on('data', printToConsole);
+    cb();
+});
 
-gulp.task('run', ['test1','test2','test3','test4']);
+gulp.task('run', ['test1','test2','test3','test4','test5']);
