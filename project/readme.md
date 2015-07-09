@@ -1,9 +1,9 @@
-# installation
+# Installation
 1. pull this repo
 2. go to the gulp-concat-bug/project directory
 3. run `npm install`
 
-# execution
+# Execution
 1. go to the gulp-concat-bug/project directory
 2. execute: `gulp run`
 
@@ -19,6 +19,9 @@ to show that the bug doesn't care where the files are relative to the gulpfile.
 If, after running the tests you look in the four test result files
 
   * gulp-concat-bug/project/test1.text ... text4.txt
+
+  **NOTE** if you dont want to run the test look in gulp-concat-bug/project/samples
+  for example test result files
 
 You will should see some unusual characters (if your a native English speaker).
 These characters are not in any of the source files.
@@ -48,3 +51,19 @@ because of the way the bogus characters are interleaved with the valid ones.
 
 I suspect that the concat is overlaying the end of one string on the beginning of
 another thus corrupting one of them.
+
+
+# Interesting Tidbits
+
+* problem is only visible when viewing file in editors such as "notepad", "editplus"
+and SublimeText3 (stable channel, build 3083)
+* problem is not visible in Atom (1.0.2) which seems to open the test files in UTF-8
+however if I tell any other editor listed to use UTF-8 encoding when opening
+the file the file is even more munged.
+* in editplus the file doesn't have the chinese character, instead there is a character
+between every space
+* if you look at the result files on github via a browser they look **perfect**.
+* in atom, the text is valid, but there are additional new lines in the resultant file.
+* I discovered this behavior after creating a bunch of .sql files from SQL Server Management Studio 2014
+by having it script creation of various user defined functions.  When I tried to concat them in a specific
+order the resultant file was not usable.
