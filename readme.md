@@ -74,3 +74,8 @@ between every space
 * I discovered this behavior after creating a bunch of .sql files from SQL Server Management Studio 2014
 by having it script creation of various user defined functions.  When I tried to concat them in a specific
 order the resultant file was not usable.  The files were created, by default, as UTF 16 LE.
+
+
+# Other thoughts
+A friend tried this on Mac OSX and he had a similar experience when opening the result files in VIM; they were
+pretty beat up.  Atom on the Mac looked the same as well - mostly correct but some extra blank lines.
