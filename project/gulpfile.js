@@ -31,7 +31,7 @@ var paths = {
         '../outerdata/test1/test4_UTF16BE.txt',
       ],
       outfile: 'test1.txt',
-      outpath: './'
+      outpath: './results1/'
     }
   },
 
@@ -44,7 +44,7 @@ var paths = {
         '../outerdata/test2/test4_UTF16LE.txt',
       ],
       outfile: 'test2.txt',
-      outpath: './'
+      outpath: './results2/'
     }
   },
   test3: {
@@ -56,7 +56,7 @@ var paths = {
         '../outerdata/test3/test4_UTF16BE.txt',
       ],
       outfile: 'test3.txt',
-      outpath: './'
+      outpath: './results3/'
     }
   },
 
@@ -69,7 +69,7 @@ var paths = {
         './innerdata/test4/test4_UTF16BE.txt',
       ],
       outfile: 'test4.txt',
-      outpath: './'
+      outpath: './results4/'
     }
   },
 
@@ -82,7 +82,7 @@ var paths = {
         './innerdata/test5/test4_UTF8.txt',
       ],
       outfile: 'test5.txt',
-      outpath: './'
+      outpath: './results5/'
     }
   },
 
@@ -100,60 +100,48 @@ function printToConsole(chunk){
 }
 
 
+function runConcatTest(d){
+  var testResults =  gulp.src(d.sources)
+    .pipe(concat(d.outfile, { newLine: ';' }))
+    .pipe(gulp.dest(d.outpath));
+    testResults.on('data', printToConsole);
+}
+function runNonConcatTest(d){
+  for(var i=0; i<d.sources.length; i++){
+    gulp.src(d.sources[i])
+      .pipe(gulp.dest(d.outpath));
+  }
+}
+
+
 gulp.task('test1', function(cb) {
-  var test1 =  gulp.src(paths.test1.concat.sources)
-    .pipe(concat(paths.test1.concat.outfile, {
-      newLine: ';'
-    }))
-    .pipe(gulp.dest(paths.test1.concat.outpath));
-
-
-    test1.on('data', printToConsole);
-
-    cb();
-
+  runConcatTest(paths.test1.concat);
+  runNonConcatTest(paths.test1.concat);
+  cb();
 });
 
 gulp.task('test2', function(cb) {
-  var test2 = gulp.src(paths.test2.concat.sources)
-    .pipe(concat(paths.test2.concat.outfile, {
-      newLine: ';'
-    }))
-    .pipe(gulp.dest(paths.test2.concat.outpath))
-    test2.on('data', printToConsole);
-
-    cb();
-
+  runConcatTest(paths.test2.concat);
+  runNonConcatTest(paths.test2.concat);
+  cb();
 });
 
 gulp.task('test3', function(cb) {
-  var test3 = gulp.src(paths.test3.concat.sources)
-    .pipe(concat(paths.test3.concat.outfile, {
-      newLine: ';'
-    }))
-    .pipe(gulp.dest(paths.test3.concat.outpath))
-    test3.on('data', printToConsole);
-    cb();
+  runConcatTest(paths.test3.concat);
+  runNonConcatTest(paths.test3.concat);
+  cb();
 });
 
 gulp.task('test4', function(cb) {
-  var test4 = gulp.src(paths.test4.concat.sources)
-    .pipe(concat(paths.test4.concat.outfile, {
-      newLine: ';'
-    }))
-    .pipe(gulp.dest(paths.test4.concat.outpath))
-    test4.on('data', printToConsole);
-    cb();
+  runConcatTest(paths.test4.concat);
+  runNonConcatTest(paths.test4.concat);
+  cb();
 });
 
 gulp.task('test5', function(cb) {
-  var test5 = gulp.src(paths.test5.concat.sources)
-    .pipe(concat(paths.test5.concat.outfile, {
-      newLine: ';'
-    }))
-    .pipe(gulp.dest(paths.test5.concat.outpath))
-    test5.on('data', printToConsole);
-    cb();
+  runConcatTest(paths.test5.concat);
+  runNonConcatTest(paths.test5.concat);
+  cb();
 });
 
 gulp.task('run', ['test1','test2','test3','test4','test5']);
